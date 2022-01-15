@@ -1,0 +1,220 @@
+
+
+<%- include ("../partials/header") %>
+<%- include ("../partials/navbar") %>
+<div id="main">
+    <div class="inner">
+        <header>
+            <h1>Manager<br />
+              </header>
+              <ul class="actions">
+                <li><a href="#" class="button ">Menu</a></li>
+                <li><a href="#" class="button">Staff</a></li>
+                <li><a href="#" class="button">Leaves</a></li>
+            </ul>
+              <section id="menuForm" style="display:none;" >
+                <h2>Menu Form</h2>
+                <form method="post" action="manager/menu">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="name" id="name" value="" placeholder="Name" required />
+                        </div>
+                        <div class="col-6 col-12-xsmall" style="display: none;">
+                            <input type="text" name="itemno" id="itemno" value="" placeholder="Item No"  />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="number" name="price" id="price" value="" placeholder="Price" required/>
+                        </div>
+                        <div class="col-12 col-12-xsmall">
+                            <input type="text" name="description" id="description" value="" placeholder="Description" required />
+                        </div>
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="vegetarian" name="vegetarian">
+                            <label for="vegetarian">Vegetarian</label>
+                        </div>
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="available" name="available">
+                            <label for="available">Available</label>
+                        </div>
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="special" name="special">
+                            <label for="special">Special</label>
+                        </div>
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="trending" name="trending">
+                            <label for="trending">Trending</label>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input id="subBtn"  type="submit" value="Create" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item No</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Vegetarian</th>
+                            <th>Special</th>
+                            <th>Trending</th>
+                            <th>Available</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(var i=0;i<menu.length;i++){%>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%=menu[i].name%></td>
+                            <td><%=menu[i].price%></td>
+                            <td><%=menu[i].isVeg%></td>
+                            <td><%=menu[i].isSpecial%></td>
+                            <td><%=menu[i].isTrending%></td>
+                            <td><%=menu[i].isAvailable%></td>
+<td><button id="<%=i%>" class="btn btn-primary" onclick="onEdit(this.id);">Edit</button></td>
+<td><button id="<%=menu[i].itemNo%>" class="btn btn-primary" onclick="onDelete(this.id)">Delete</button></td>
+
+                        </tr>
+                        <%}%>
+                       
+                    </tbody>
+                   
+                </table>
+       
+
+
+            </section>
+
+
+
+            <section id="staffForm" >
+                <h2>Staff Form</h2>
+                <form method="post" action="manager/staff">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="name" id="name" value="" placeholder="Name" required />
+                        </div>
+                        <div class="col-6 col-12-xsmall" style="display: none;">
+                            <input type="text" name="staffId" id="staffId" value="" placeholder="staffId"  />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="phone" id="phone" value="" placeholder="Phone No." required/>
+                        </div>
+                        <div class="col-12 col-12-xsmall">
+                            <input type="text" name="address" id="address" value="" placeholder="Address" required />
+                        </div>
+                        <div class="col-12">
+                            <select name="demo-category" id="demo-category" required>
+                                <option value="">- Choose a role -</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="pan" id="pan" value="" placeholder="Pan No." />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" name="aadhar" id="aadhar" value="" placeholder="Aadhar No." />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="email" name="email" id="phone" value="" placeholder="Email" required/>
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="password" name="password" id="password" value="" placeholder="Password" required/>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input id="subBtn"  type="submit" value="Create" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Staff Id</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Present</th>
+                            <th>Absent</th>
+                            <th>Edit</th>
+                            <th>Report</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(var i=0;i<staff.length;i++){%>
+                        <tr>
+                            <td><%=staff[i].staffId%></td>
+                            <td><%=staff[i].name%></td>
+                            <td><%=menu[i].price%></td>
+                            <td><%=menu[i].isVeg%></td>
+                            <td><%=menu[i].isSpecial%></td>
+                            <td><%=menu[i].isTrending%></td>
+                            <td><%=menu[i].isAvailable%></td>
+<td><button id="<%=i%>" class="btn btn-primary" onclick="onEdit(this.id);">Edit</button></td>
+<td><button id="<%=menu[i].itemNo%>" class="btn btn-primary" onclick="onDelete(this.id)">Delete</button></td>
+
+                        </tr>
+                        <%}%>
+                       
+                    </tbody>
+                   
+                </table>
+       
+
+
+            </section>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<%- include ("../partials/footer") %>
+
+<script>
+   function onEdit(i){
+    var obj =<%-JSON.stringify(menu)%>
+     $("#name").val(obj[i].name)
+     $("#itemno").val(obj[i].itemNo)
+     console.log( $("#special").val())
+     $("#special").prop( "checked", obj[i].isSpecial=="Y" );
+     $("#trending").prop( "checked", obj[i].isTrending=="Y" );
+     $("#vegetarian").prop( "checked", obj[i].isVeg=="Y" );
+     $("#available").prop( "checked", obj[i].isAvailable=="Y" );
+     $("#description").val(obj[i].description)
+     $("#price").val(obj[i].price)
+     $("#subBtn").val("Edit")
+    }
+
+    function onDelete(id){
+        $.ajax({
+    url: 'manager/menu/'+id,
+    type: 'DELETE',
+    contentType:'application/json',  // <---add this
+    dataType: 'text',                // <---update this
+    success: function(data) { console.log('Success: ' + data); location.reload()},
+    error: function(data){            console.log('Error: ' + data);
+    location.reload()
+        }
+});
+       
+    }
+</script>

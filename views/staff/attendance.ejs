@@ -1,0 +1,89 @@
+<%- include ("../partials/header") %>
+<%- include ("../partials/navbar") %>
+<div id="main">
+    <div class="inner">
+        <header>
+            <h1>Attendance<br />
+              </header>
+              <section>
+                <div class="row gtr-uniform">
+                    <div class="col-6 col-12-xsmall">
+                        <h4>Jan 14, 2022</h4>
+                    </div>
+                <div class="col-12">
+                    <ul class="actions">
+                        <li><input type="submit" value="Clock In" class="primary" /></li>
+                        <li><input type="submit" value="Clock Out" class="secondary" /></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-12-xsmall">
+                    <h5>Clock In Time - </h5>
+                </div>
+                <div class="col-6 col-12-xsmall">
+                    <h5>Monthly Summary</h5>
+                    <h5>Total Days- </h5>
+                    <h5>Present- </h5>
+                    <h5>Absent- </h5>
+                </div>
+                </div>
+              </section>
+              <br/>
+              <hr>
+              <br/>
+              <section>
+                <h2>Apply for leave</h2>
+                <form method="post" action="#">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <label for="fromDate">From Date</label>
+                            <input type="date" name="fromDate" id="fromDate" value="" placeholder="From Date" />
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label for="toDate">To Date</label>
+                            <input type="date" name="toDate" id="toDate" value="" placeholder="To Date" />
+                        </div>
+                        <div class="col-12 col-12-xsmall">
+                            <input type="text" name="reason" id="reason" value="" placeholder="Reason" />
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Submit" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+
+                <h3>Leaves Applied</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Request Id</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Ante turpis integer aliquet porttitor.</td>
+                                <td>29.99</td>
+                                <td>29.99</td>
+                                <td>29.99</td>
+
+                            </tr>
+                           
+                        </tbody>
+                       
+                    </table>
+               
+            </section>
+
+
+    </div>
+</div>
+
+<%- include ("../partials/footer") %>
