@@ -10,6 +10,7 @@
 
             <section id="table">
                 <h3>Order</h3>
+                <h3>Status - <%=order.status%></h3>
                 <div class="table-wrapper">
                     <table>
                         <thead>
@@ -19,50 +20,56 @@
                                 <th>Veg</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
-
+                                <th>Cost</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Item One</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Two</td>
-                                <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Three</td>
-                                <td> Morbi faucibus arcu accumsan lorem.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Four</td>
-                                <td>Vitae integer tempus condimentum.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Five</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
+                           <%for(var i=0;i<items.length;i++){var cost = items[i].quantity*items[i].price %>
+                               <tr>
+                                   <td><%=items[i].name%></td>
+                                   <td><%=items[i].description%></td>
+                                   <td><%=items[i].isVeg%></td>
+                                   <td><%=items[i].price%></td>
+                                   <td><%=items[i].quantity%></td>
+                                   <td><%=cost%></td>
+
+                               </tr>
+                               <%}%>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td colspan="4"></td>
+                                <td >CGST</td>
+                                <td><%=order.cgst%></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td >SGST</td>
+                                <td><%=order.sgst%></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                                <td >Total</td>
+                                <td><%=order.total%></td>
+                            </tr>
+                            <tr>
+                                <td>Invoice Date</td>
+                                <td><%=order.create_date%></td>
                                 <td colspan="2"></td>
-                                <td>100.00</td>
+                                <td >Amount</td>
+                                <td><%=order.amount%></td>
                             </tr>
                         </tfoot>
                     </table>
+                    <button>Print Invoice</button>
+                    <% if(order.status!='C'){%>  
+                    <button onclick="paid()">Mark as Paid</button>
+                    <%}%>
+                        
+
                 </div>
 
-                <div class="col-12">
-                    <ul class="actions">
-                        <li><input type="submit" value="Payment Received" class="primary" /></li>
-                    </ul>
-                </div>
+               
             </section>
 
 
@@ -71,3 +78,22 @@
 </div>
 
 <%- include ("../partials/footer") %>
+
+<script>
+    function paid(){
+        $.post('/cashier/payment/',
+{orderNo: <%-order.orderNo%>},
+      function(data, status){
+        console.log(data);
+        if(data.success){
+
+        }else{
+            console.log(data.error)
+    
+        }
+        location.reload()
+
+      });
+       
+    }
+</script>

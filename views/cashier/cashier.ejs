@@ -17,43 +17,26 @@
                                 <th>Order No</th>
                                 <th>Table No</th>
                                 <th>Total Amount</th>
+                                <th>Status</th>
+
                                 <th>Generate Invoice</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Item One</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Two</td>
-                                <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Three</td>
-                                <td> Morbi faucibus arcu accumsan lorem.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Four</td>
-                                <td>Vitae integer tempus condimentum.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Five</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
+                            <%for(var i=0;i<orders.length;i++){ %>
+<tr>
+    <td><%=orders[i].orderNo%></td>
+    <td><%=orders[i].tableNo%></td>
+    <td><%=orders[i].amount%></td>
+    <td><%=orders[i].status%></td>
+    <td><button id="<%=orders[i].orderNo%>" class="btn btn-primary" onclick="getInvoice(this.id)">Generate Invoice</button></td>
+
+</tr>
+                                <%}%>
+
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td>100.00</td>
-                            </tr>
-                        </tfoot>
+                       
                     </table>
                 </div>
 
@@ -70,3 +53,10 @@
 </div>
 
 <%- include ("../partials/footer") %>
+
+<script>
+  function  getInvoice(orderNo){
+        document.location.href = '/cashier/payment?orderNo='+orderNo
+
+    }
+</script>

@@ -12,18 +12,19 @@
                     </div>
                 <div class="col-12">
                     <ul class="actions">
-                        <li><input type="submit" value="Clock In" class="primary" /></li>
-                        <li><input type="submit" value="Clock Out" class="secondary" /></li>
+                        <li><input type="submit" value="Clock In" class="primary" onclick="clockIn()"/></li>
+                        <li><input type="submit" value="Clock Out" class="secondary" onclick="clockOut()" /></li>
                     </ul>
                 </div>
                 <div class="col-6 col-12-xsmall">
-                    <h5>Clock In Time - </h5>
+                    <h5>Clock In Time - <%=clockIn%></h5>
                 </div>
                 <div class="col-6 col-12-xsmall">
                     <h5>Monthly Summary</h5>
-                    <h5>Total Days- </h5>
-                    <h5>Present- </h5>
-                    <h5>Absent- </h5>
+                    <h5>Total Days-  <%=total%> </h5>
+                    <%var present = total-absent%>
+                    <h5>Present- <%=present%> </h5>
+                    <h5>Absent- <%=absent%> </h5>
                 </div>
                 </div>
               </section>
@@ -87,3 +88,38 @@
 </div>
 
 <%- include ("../partials/footer") %>
+
+<script>
+    function clockIn(){
+        $.post('/attendance/',
+{staffId: 4,clockIn:true},
+      function(data, status){
+        console.log(data);
+        if(data.success){
+
+        }else{
+            console.log(data.error)
+    
+        }
+        location.reload()
+
+      });
+       }
+
+       function clockOut(){
+        $.post('/attendance/',
+{staffId: 4},
+      function(data, status){
+        console.log(data);
+        if(data.success){
+
+        }else{
+            console.log(data.error)
+    
+        }
+        location.reload()
+
+      });
+       }
+    
+</script>

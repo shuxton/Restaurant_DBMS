@@ -1,0 +1,83 @@
+
+
+<%- include ("../partials/header") %>
+<%- include ("../partials/navbar") %>
+<div id="main">
+    <div class="inner">
+        <header>
+            <h1>Manager<br />
+              </header>
+              <ul class="actions">
+                <li><a href="/manager/leaves" class="button ">leaves</a></li>
+                <li><a href="/manager/staff" class="button">Staff</a></li>
+                <li><a href="/manager/leaves" class="button">Leaves</a></li>
+            </ul>
+              <section id="leavesForm"  >
+                <h2>Leaves</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Leave Id</th>
+                            <th>Staff Id</th>
+                            <th>Staff Name</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Reason</th>
+                            <th>Approve</th>
+                            <th>Reject</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(var i=0;i<leaves.length;i++){%>
+                        <tr>
+                            <td><%=leaves[i].leaveId%></td>
+                            <td><%=leaves[i].staffId%></td>
+                            <td><%=leaves[i].name%></td>
+                            <td><%=leaves[i].fromDate%></td>
+                            <td><%=leaves[i].toDate%></td>
+                            <td><%=leaves[i].reason%></td>
+                            
+<%if(leaves[i].status=="P"){%>
+<td><button id="<%=leaves[i].leaveId%>" class="btn btn-primary" onclick="updateStatus(this.id,'A');">Approve</button></td>
+<td><button id="<%=leaves[i].leaveId%>" class="btn btn-primary" onclick="updateStatus(this.id,'R')">Reject</button></td>
+<%}else if(leaves[i].status=="A"){%>
+    <td>✓</td>
+    <td></td>
+    <%}else{%>
+        <td></td>
+        <td>✓</td>
+    <%}%>
+                        </tr>
+                        <%}%>
+                       
+                    </tbody>
+                   
+                </table>
+       
+
+
+            </section>
+
+
+    </div>
+</div>
+
+<%- include ("../partials/footer") %>
+
+<script>
+
+
+    function updateStatus(id,status){
+
+        $.post('/manager/leaves/'+id,
+        {status:status},
+  function(data, status){
+    console.log("Data: " + data + "\nStatus: " + status);
+    location.reload()
+  });
+
+
+       
+    }
+</script>

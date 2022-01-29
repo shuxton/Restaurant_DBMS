@@ -8,11 +8,10 @@
               
               <section id="table" hidden>
                 <h2>Let's get a table</h2>
-                <form method="post" action="#">
                     <div class="row gtr-uniform">
                        
                         <div class="col-12">
-                            <select name="demo-category" id="demo-category">
+                            <select name="capacity" id="capacity" >
                                 <option value="">- Table For -</option>
                                 <option value="2">2</option>
                                 <option value="4">4</option>
@@ -21,15 +20,18 @@
                             </select>
                         </div>
                       
-                        <div class="col-12">
+                        <div class="col-4">
                             <ul class="actions">
-                                <li><input type="submit" value="Request a table" class="primary" /></li>
+                                <li><input id="request" type="submit" value="Request a table" class="primary" onclick="requestTable()" /></li>
                             </ul>
+                            
+                        </div>
+                        <div class="col-8">
+                            <h2 id="tableStatus"><%=tableStatus%></h2>
                         </div>
                     </div>
-                </form>
             </section>
-
+<br/>
             <section id="table">
                 <h3>Menu</h3>
                 <div class="table-wrapper">
@@ -40,96 +42,41 @@
                                 <th>Description</th>
                                 <th>Veg</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Add</th>
+                                <th style="text-align: center;">Quantity</th>
+                                <th>Remove</th>
 
                             </tr>
                         </thead>
                         <tbody>
+                            <%for(var i=0;i<menu.length;i++){%>
                             <tr>
-                                <td>Item One</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
+                                <td><%=menu[i].name%></td>
+                                <td><%=menu[i].description%></td>
+                                <td><%=menu[i].isVeg%></td>
+                                <td><%=menu[i].price%></td>
+                                <td><button id="<%=menu[i].itemNo%>" class="btn btn-primary" onclick="onAdd(this.id)">+</button></td>
+                                <td  id="quantity<%=menu[i].itemNo%>" style="text-align: center;font-weight: bolder;font-size: larger;">0</td>
+                                <td><button id="<%=menu[i].itemNo%>" class="btn btn-primary" onclick="onRemove(this.id)">-</button></td>
+
                             </tr>
-                            <tr>
-                                <td>Item Two</td>
-                                <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Three</td>
-                                <td> Morbi faucibus arcu accumsan lorem.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Four</td>
-                                <td>Vitae integer tempus condimentum.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Five</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td>100.00</td>
-                            </tr>
-                        </tfoot>
+                            <%}%>
+                                                  </tbody>
+                       
                     </table>
                 </div>
 
-                <h3>Items Selected</h3>
-                <div class="table-wrapper">
-                    <table class="alt">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Veg</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Item One</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Two</td>
-                                <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Three</td>
-                                <td> Morbi faucibus arcu accumsan lorem.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Four</td>
-                                <td>Vitae integer tempus condimentum.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Five</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td>100.00</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+               
                 <div class="col-12">
                     <ul class="actions">
-                        <li><input type="submit" value="Place Order" class="primary" /></li>
-                    </ul>
+                        <%if(orderNo){%>
+                        <li><input id="place" type="submit" value="Place Order" class="primary" onclick="placeOrder()" /></li>
+                        <%}else{%>
+                        <li>
+                            
+                                <button id="place" type="submit"  class="primary" onclick="viewOrder()" >View Order</button></li>
+                    <%}%>
+                            </ul>
                 </div>
             </section>
 
@@ -138,4 +85,87 @@
     </div>
 </div>
 
+
 <%- include ("../partials/footer") %>
+
+<script>
+
+
+    function ready() {
+        var obj =<%-JSON.stringify(tableStatus)%>
+        console.log(obj)
+        if(obj){
+            $("#request").prop("disabled",true)
+            $("#capacity").prop("disabled",true)
+    
+        }
+    
+    }
+    
+    ready()
+    
+
+    function onAdd(id){
+var q = parseFloat($("#quantity"+id).html())+1
+$("#quantity"+id).html(q)
+    }
+
+    function onRemove(id){
+var q = parseFloat($("#quantity"+id).html())-1
+if(q<0)q=0
+$("#quantity"+id).html(q)
+    }
+
+function viewOrder(orderNo){
+document.location.href = '/invoice?orderNo='+<%-JSON.stringify(orderNo)%>
+}
+
+    function placeOrder(){
+        var order = [],total=0
+        var obj =<%-JSON.stringify(menu)%>
+        console.log(obj,obj.length)
+
+        for(var i=0;i<obj.length;i++){
+            var q = parseFloat($("#quantity"+obj[i].itemNo).html())
+            if(q>0){
+                total+= parseFloat(obj[i].price)
+                var temp={'itemNo':obj[i].itemNo,'quantity':q}
+                order.push(temp)
+            }
+        }
+console.log(order)
+
+$.post('/customer/placeorder/',
+{items: order,customerId:1,total:total},
+      function(data, status){
+        console.log(data);
+        if(data.success){
+
+        }else{
+            console.log(data.error)
+    
+        }
+        location.reload()
+
+      });
+       
+     
+    }
+
+
+       function requestTable(){
+            $.post('/customer/table/',
+            {capacity: $("#capacity").val(),customerId:1},
+      function(data, status){
+        console.log(data);
+        if(data.success){
+      $("#tableStatus").html(data.success)
+        }else{
+            $("#tableStatus").html(data.error)
+    
+        }
+        location.reload()
+      });
+        }
+    </script>
+    

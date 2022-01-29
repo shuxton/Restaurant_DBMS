@@ -21,51 +21,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>6</td>
-                                <td>
-                                    <li>Dosa x1</li>
-                                    <li>Idli x2</li>
+                            <%for(var i=0;i<orders.length;i++){%>
+                                <tr>
+                                    <td><%=orders[i].orderNo%></td>
+                                    <td><%=orders[i].tableNo%></td>
+                                    <td>
+                                        <%for(var j=0;j<items.length;j++){if(items[j].orderNo==orders[i].orderNo){%>
+                                            <li><%=items[j].name%> x <%=items[j].quantity%></li>
+                                           <%}}%>
                                 </td>
                                 
                                 <td>
-                                    <select name="demo-category" id="demo-category">
-                                        <option value="">Waiting</option>
-                                        <option value="2">2</option>
-                                        <option value="4">4</option>
-                                        <option value="6">6</option>
-                                        <option value="8">8</option>
+                                    <select name="status" id="<%=orders[i].orderNo%>" onchange="onChange(this.id,this.value)">
+                                        <option value="P">Pending</option>
+                                        <option value="A">Accepted</option>
+                                        <option value="S">Served</option>
+                                       
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Item Two</td>
-                                <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Three</td>
-                                <td> Morbi faucibus arcu accumsan lorem.</td>
-                                <td>29.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Four</td>
-                                <td>Vitae integer tempus condimentum.</td>
-                                <td>19.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Five</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                            </tr>
+                                    <%}%>
+                           
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td>100.00</td>
-                            </tr>
-                        </tfoot>
+                       
                     </table>
                 </div>
 
@@ -78,3 +56,32 @@
 </div>
 
 <%- include ("../partials/footer") %>
+
+<script>
+    function ready(){
+        var obj =<%-JSON.stringify(orders)%>
+       console.log(obj)
+       for(var j=0;j<obj.length;j++){
+           $("#"+obj[j].orderNo).val(obj[j].status)
+       }
+    }
+
+    function onChange(id,val){
+        $.post('/cookingstaff/',
+{orderNo: id,status:val},
+      function(data, status){
+        console.log(data);
+        if(data.success){
+
+        }else{
+            console.log(data.error)
+    
+        }
+        location.reload()
+
+      });
+       }
+    
+
+    ready()
+</script>
