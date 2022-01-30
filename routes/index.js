@@ -24,6 +24,16 @@ module.exports = function (app) {
         res.render('pages/element');
     });
 
+    function getStaffRole(roleId){
+        switch(roleId){
+           case 1: return "Cheff";
+           case 2: return "Waiter";
+           case 3: return "Cashier";
+           case 4: return "Other";
+           case 5: return "Manager";
+           default: return "None";
+        }
+    }
 
     // ----------------------------------------------------------------------------------
 
@@ -48,212 +58,291 @@ module.exports = function (app) {
                     console.log(error);
                 
 
-
                 console.log('Rows affected ', results[0].affectedRows);
 
+                if (results[0].affectedRows > 0) 
+                    res.redirect('/login');
+                 else 
+                    res.redirect("/signup")
+                
             });
         } catch (e) {
             console.log(e);
+
         }
 
-        res.redirect('/customer');
 
     });
 
-    // ----------------------------------------------------------------------------------
 
-    app.get('/customer', function (req, res) {
-        var tableStatus = "",
-            menu = []
+    app.post('/login', function (req, res) {
         try {
+            var staff =false
+            if(req.body.email.split('@')[1]=="staff.com") staff =true
+            console.log(req.body)
             var params = []
-            var sql = "select tableNo from tables where customerId=? and isOccupied='Y' limit 1;"
-            params = [1]
-
-            console.log(params)
-
+            var sql = 'call customer_login(?,?)'
+            if(staff) sql = 'call staff_login(?,?)'
+            params = [req.body.email, req.body.password]
 
             connection.query(sql, params, function (error, results, fields) {
                 if (error) 
                     console.log(error);
                 
 
+                console.log('Rows affected ', results);
+                console.log(results)
 
-                console.log('Rows affected ', results.length);
-                tableStatus = results[0]['tableNo']
+                if (results[0].length > 0) {
+                    if(!staff){
+                    req.session.userId = results[0][0].customerId?results[0][0].customerId:null;
+                    req.session.userType = 'Customer';
+                    res.redirect('/customer');
+                    } else{
+                        req.session.userId = results[0][0].staffId?results[0][0].staffId:null;
+                        req.session.userType = getStaffRole(results[0][0].roleId?results[0][0].roleId:null);
+                        res.redirect('/staff');
+                    }
+                    
 
-                if (! tableStatus) 
-                    tableStatus = null
-                 else 
-                    tableStatus = "Table no. " + tableStatus + " assigned"
+                } else 
+                    res.redirect('/login');
+                
+            });
+        } catch (e) {
+            console.log(e);
+            res.redirect('/login');
 
-                 connection.query("select * from menu where isAvailable='Y'", [], function (error, results, fields) {
+        }
+
+
+    });
+    // ----------------------------------------------------------------------------------
+
+    app.get('/customer', function (req, res) {
+
+        if (! req.session.userId && req.session.userType != 'Customer') 
+            res.redirect('/login')
+         else {
+            var tableStatus = null,
+                menu = []
+            try {
+                var params = []
+                var sql = "select tableNo from tables where customerId=? and isOccupied='Y' limit 1;"
+                params = [req.session.userId]
+                console.log(req.session, "session")
+
+                console.log(params)
+
+
+                connection.query(sql, params, function (error, results, fields) {
                     if (error) 
                         console.log(error);
                     
 
 
                     console.log('Rows affected ', results.length);
-                    menu = results
+                    if (results.length > 0) 
+                        tableStatus = results[0]['tableNo']
 
-                    var orderNo = null
-                    connection.query("select orderNo from orders where status<>'C' and customerId=? limit 1", [1], function (error, results, fields) {
-                        if (error) 
-                            console.log(error);
-                       
-                        console.log('Rows affected ', results.length);
-                        orderNo = results[0].orderNo
-                        res.render('customer/customer', {tableStatus, menu, orderNo});
+                    
 
-                    })
+                    if (! tableStatus) 
+                        tableStatus = null
+                     else 
+                        tableStatus = "Table no. " + tableStatus + " assigned"
 
-                })
-
-
-            });
-        } catch (e) {
-            console.log(e);
-            tableStatus = null
-
-            res.render('customer/customer', {tableStatus, menu});
-
-        }
-
-    });
-
-    app.post('/customer/table', function (req, res) {
-        try {
-            console.log(req.body)
-            var params = []
-            var sql = 'call assign_table(?,?,@tableNo); select @tableNo;'
-            params = [req.body.customerId, req.body.capacity,]
-
-            console.log(params)
-
-
-            connection.query(sql, params, function (error, results, fields) {
-                if (error) 
-                    console.log(error);
-                
-
-                console.log('Rows affected ', results[0].affectedRows);
-                if (results[1][0]['@tableNo']) 
-                    res.json({
-                        success: "Table " + results[1][0]['@tableNo'] + " Assigned"
-                    });
-                 else 
-                    res.json({error: "No table is available. Please try again later"});
-                
-
-
-            });
-        } catch (e) {
-            console.log(e);
-            res.json({error: "No table is available. Please try again later"});
-
-        }
-
-
-    });
-
-
-    app.post('/customer/placeorder', function (req, res) {
-        try { // var obj = JSON.parse(req.body)
-            console.log(req.body)
-            var orderNo = null
-            var sgst = parseFloat(req.body.total) * 2.5
-            var cgst = sgst;
-            var total = sgst + cgst + parseFloat(req.body.total)
-            var params = []
-            var sql = 'call customer_order(@orderNo,?,?,?,?,?,?,?); select @orderNo;'
-            params = [
-                req.body.customerId,
-                cgst,
-                sgst,
-                total,
-                req.body.total,
-                'P',
-                null
-            ]
-
-
-
-            connection.query(sql, params, function (error, results, fields) {
-                if (error) 
-                    console.log(error);
-                
-                console.log('Rows affected ', results[0].affectedRows);
-                orderNo = results[1][0]['@orderNo']
-
-                sql = "call customer_order_item(?,?,?);"
-                for (var i = 0; i < req.body.items.length; i++) 
-                    connection.query(sql, [
-                        orderNo, req.body.items[i].itemNo,
-                        req.body.items[i].quantity
-                    ], function (error, results, fields) {
+                     connection.query("select * from menu where isAvailable='Y'", [], function (error, results, fields) {
                         if (error) 
                             console.log(error);
                         
 
 
-                        console.log('Item inserted ', results.affectedRows);
+                        console.log('Rows affected ', results.length);
+                        menu = results
+
+                        var orderNo = null
+                        connection.query("select orderNo from orders where status<>'C' and customerId=? limit 1", [req.session.userId], function (error, results, fields) {
+                            if (error) 
+                                console.log(error);
+                            
 
 
-                    });
-                
+                            console.log('Rows affected ', results.length);
+                            console.log(results,results[0]['orderNo'])
+                            if (results.length > 0) 
+                                orderNo = results[0]['orderNo']
+                            
+                            res.render('customer/customer', {tableStatus, menu, orderNo});
+
+                        })
+
+                    })
 
 
-            });
+                });
+            } catch (e) {
+                console.log(e);
+                tableStatus = null
 
-            res.json({success: "Success"});
-        } catch (e) {
-            console.log(e);
-            res.json({error: "Error accoured"});
+                res.render('customer/customer', {tableStatus, menu});
 
+            }
+        }
+
+    });
+
+    app.post('/customer/table', function (req, res) {
+        if (! req.session.userId && req.session.userType != 'Customer') 
+            res.json({error: "Unauthorised"});
+         else {
+            try {
+                console.log(req.body)
+                var params = []
+                var sql = 'call assign_table(?,?,@tableNo); select @tableNo;'
+                params = [
+                    req.session.customerId,
+                    req.body.capacity == "" ? 0 : req.body.capacity
+                ]
+
+                console.log(params)
+
+
+                connection.query(sql, params, function (error, results, fields) {
+                    if (error) 
+                        console.log(error);
+                    
+
+
+                    console.log('Rows affected ', results[0].affectedRows);
+                    if (results[1][0]['@tableNo']) 
+                        res.json({
+                            success: "Table " + results[1][0]['@tableNo'] + " Assigned"
+                        });
+                     else 
+                        res.json({error: "No table is available. Please try again later"});
+                    
+
+
+                });
+            } catch (e) {
+                console.log(e);
+                res.json({error: "No table is available. Please try again later"});
+
+            }
+        }
+
+    });
+
+
+    app.post('/customer/placeorder', function (req, res) {
+        if (! req.session.userId && req.session.userType != 'Customer') 
+            res.json({error: "Unauthorised"});
+         else {
+            try { // var obj = JSON.parse(req.body)
+                console.log(req.body)
+                var orderNo = null
+                var sgst = parseFloat(req.body.total) * 2.5
+                var cgst = sgst;
+                var total = sgst + cgst + parseFloat(req.body.total)
+                var params = []
+                var sql = 'call customer_order(@orderNo,?,?,?,?,?,?,?); select @orderNo;'
+                params = [
+                    req.body.customerId,
+                    cgst,
+                    sgst,
+                    total,
+                    req.body.total,
+                    'P',
+                    null
+                ]
+
+
+                connection.query(sql, params, function (error, results, fields) {
+                    if (error) 
+                        console.log(error);
+                    
+
+
+                    console.log('Rows affected ', results[0].affectedRows);
+                    orderNo = results[1][0]['@orderNo']
+
+                    sql = "call customer_order_item(?,?,?);"
+                    for (var i = 0; i < req.body.items.length; i++) 
+                        connection.query(sql, [
+                            orderNo, req.body.items[i].itemNo,
+                            req.body.items[i].quantity
+                        ], function (error, results, fields) {
+                            if (error) 
+                                console.log(error);
+                            
+
+
+                            console.log('Item inserted ', results.affectedRows);
+
+
+                        });
+                    
+
+
+                });
+
+                res.json({success: "Success"});
+            } catch (e) {
+                console.log(e);
+                res.json({error: "Error accoured"});
+
+            }
         }
 
 
     });
     // ----------------------------------------------------------------------------------
 
-    app.get('/invoice', function (req, res) {
-        var order = null,
-            items = []
-        try {
-            var params = []
-            var sql = 'call order_details(?,?);'
-            params = [req.query.orderNo, 1]
+    app.get('/customer/invoice', function (req, res) {
+        if (! req.session.userId && req.session.userType != 'Customer') 
+            res.redirect("/Login")
+         else {
+            var order = null,
+                items = []
+            try {
+                var params = []
+                var sql = 'call order_details(?,?);'
+                params = [req.query.orderNo, req.session.userId]
 
 
-            connection.query(sql, params, function (error, results, fields) {
-                if (error) 
-                    console.log(error);
-                
+                connection.query(sql, params, function (error, results, fields) {
+                    if (error) 
+                        console.log(error);
+                    
 
 
-                order = results[0]
-                if (order) 
-                    order = order[0]
+                    order = results[0]
+                    if (order) 
+                        order = order[0]
 
 
-                
+                    
 
 
-                items = results[1]
-                res.render('customer/invoice', {order, items});
+                    items = results[1]
+                    res.render('customer/invoice', {order, items});
 
 
-            });
-        } catch (e) {
-            console.log(e);
-            res.render('customer');
+                });
+            } catch (e) {
+                console.log(e);
+                res.render('customer');
+            }
         }
-
     });
 
     // ----------------------------------------------------------------------------------
 
     app.get('/cookingStaff', function (req, res) {
+        if (! req.session.userId && req.session.userType != 'Cheff') 
+        res.redirect('/login')
+     else {
         var orders = [],
             items = []
         try {
@@ -276,10 +365,13 @@ module.exports = function (app) {
             console.log(e);
             res.render('cookingStaff/cookingStaff', {orders, items});
         }
+    }
     });
 
     app.post('/cookingStaff', function (req, res) {
-
+        if (! req.session.userId && req.session.userType != 'Cheff') 
+        res.json({error:"Unauthorised"})
+     else {
         try {
             var params = []
             var sql = 'update orders set status=? where orderNo=?;'
@@ -300,10 +392,14 @@ module.exports = function (app) {
             console.log(e);
             res.json({error: "Error"});
         }
+    }
     });
 
 
     app.get('/cashier', function (req, res) {
+        if (! req.session.userId && req.session.userType != 'Cashier') 
+        res.redirect('/login')
+     else {
         var orders = []
         try {
             var params = []
@@ -324,15 +420,19 @@ module.exports = function (app) {
             console.log(e);
             res.render('cashier/cashier', {orders});
         }
+    }
     });
 
     app.get('/cashier/payment', function (req, res) {
+        if (! req.session.userId && req.session.userType != 'Cashier') 
+        res.redirect('/login')
+     else {
         var order = null,
             items = []
         try {
             var params = []
             var sql = 'call order_details(?,?);'
-            params = [req.query.orderNo, 1]
+            params = [req.query.orderNo, req.query.customerId]  //to be fixed
 
 
             connection.query(sql, params, function (error, results, fields) {
@@ -358,12 +458,15 @@ module.exports = function (app) {
             console.log(e);
             res.render('cashier');
         }
+    }
 
     });
 
 
     app.post('/cashier/payment', function (req, res) {
-
+        if (! req.session.userId && req.session.userType != 'Cashier') 
+        res.json({error:'Unauthorised'})
+     else {
         try {
             var params = []
             var sql = "update orders set status='C' where orderNo=?"
@@ -385,71 +488,81 @@ module.exports = function (app) {
             res.json({error: "Error"});
 
         }
-
+    }
     });
 
     // -------------------------------------------------------------------------------------
 
-    app.get('/attendance', function (req, res) {
+    app.get('/staff', function (req, res) {
+        if (! req.session.userId || req.session.userType == 'Customer') 
+        res.redirect('/login')
+     else {
         var menu = [],
-        params=[]
-    try {
-        var date = new Date()
- params=[
-4,
-date.toISOString().slice(0, 19).split('T')[0],
- new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 19).split('T')[0],
- new Date(date.getFullYear(), date.getMonth()+1, 0).toISOString().slice(0, 19).split('T')[0],
- new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 19).split('T')[0],
- new Date(date.getFullYear(), date.getMonth()+1, 0).toISOString().slice(0, 19).split('T')[0]
- ]
+            params = []
+        try {
+            var date = new Date()
+            params = [
+                req.session.userId,
+                date.toISOString().slice(0, 19).split('T')[0],
+                new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 19).split('T')[0],
+                new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 19).split('T')[0],
+                new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 19).split('T')[0],
+                new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 19).split('T')[0],
+                req.session.userId
+            ]
 
- //console.log(params)
+            // console.log(params)
 
-        connection.query("select clockIn from attendance where staffId=? and day=?;select count(*) as total from attendance where day>=? and day<=?; select count(*) as absent from attendance where day>=? and day<=? and isPresent='N' ;",params, function (error, results, fields) {
-            if (error) 
-                console.log(error);
-            
+            connection.query("select clockIn,clockOut from attendance where staffId=? and day=?;select count(*) as total from attendance where day>=? and day<=?; select count(*) as absent from attendance where day>=? and day<=? and isPresent='N' ; select * from leaves where staffId=? order by leaveId desc;", params, function (error, results, fields) {
+                if (error) 
+                    console.log(error);
+                
 
-               // results = results[0]
+                console.log(results);
 
-            console.log( results,{clockIn:results[0][0].clockIn,total:results[1][0].total,absent:results[2][0].absent});
+                res.render('staff/attendance', {
+                    clockIn:results[0][0] && results[0][0].clockIn? results[0][0].clockIn.toISOString().slice(0, 19).replace('T', ' '):null,
+                    clockOut:results[0][0] && results[0][0].clockOut? results[0][0].clockOut.toISOString().slice(0, 19).replace('T', ' '):null,
+                    total: results[1][0] && results[1][0].total?results[1][0].total :null,
+                    absent:results[2][0] && results[2][0].absent? results[2][0].absent :null,
+                    leaves: results[3]
+                });
 
-            res.render('staff/attendance',{clockIn:results[0][0].clockIn.toISOString().slice(0, 19).replace('T', ' '),total:results[1][0].total,absent:results[2][0].absent});
 
+            })
+        } catch (e) {
+            console.log(e)
+            res.render('staff/attendance');
 
-
-        })
-    } catch (e) {
-        console.log(e)
-        res.render('staff/attendance');
-
-    }
+        }}
     });
 
     app.post('/attendance', function (req, res) {
+        if (! req.session.userId || req.session.userType == 'Customer') 
+        res.json({error:"Unauthorised"})
+     else {
         var menu = [],
-            params=[]
+            params = []
         try {
             var date = new Date()
-           if(req.body.clockIn)
-params=[
-    req.body.staffId,
-    date.toISOString().slice(0, 19).replace('T', ' '),
-    null,
-    date.toISOString().slice(0, 19).split('T')[0],
-    'Y'
-]
-else
-params=[
-    req.body.staffId,
-    null,
-    date.toISOString().slice(0, 19).replace('T', ' '),  
-    date.toISOString().slice(0, 19).split('T')[0],
-    'Y'
-]
+            if (req.body.clockIn) 
+                params = [
+                    req.session.userId,
+                    date.toISOString().slice(0, 19).replace('T', ' '),
+                    null,
+                    date.toISOString().slice(0, 19).split('T')[0],
+                    'Y'
+                ]
+             else 
+                params = [
+                    req.session.userId,
+                    null,
+                    date.toISOString().slice(0, 19).replace('T', ' '),
+                    date.toISOString().slice(0, 19).split('T')[0],
+                    'Y'
+                ]
 
-            connection.query('call attendance(?,?,?,?,?);',params, function (error, results, fields) {
+             connection.query('call attendance(?,?,?,?,?);', params, function (error, results, fields) {
                 if (error) 
                     console.log(error);
                 
@@ -461,21 +574,61 @@ params=[
                 res.json({success: "Success"});
 
 
-
             })
         } catch (e) {
             console.log(e)
             res.json({error: "Error"});
 
-        }
+        }}
     });
 
+
+    app.post('/attendance/leave/:staffId', function (req, res) {
+        if (! req.session.userId || req.session.userType == 'Customer')  //to be fixed
+        res.json({error:"Unauthorised"})
+     else {
+        var menu = [],
+            params = []
+        try {
+            var date = new Date()
+
+            params = [
+                req.session.userId,
+                req.body.fromDate,
+                req.body.toDate,
+                'P',
+                req.body.reason,
+            ]
+
+
+            connection.query('insert into leaves (staffId,fromDate,toDate,status,reason) values (?,?,?,?,?);', params, function (error, results, fields) {
+                if (error) 
+                    console.log(error);
+                
+
+
+                console.log('Affected rows - : ', results.affectedRows);
+
+                res.redirect("/attendance");
+
+
+            })
+        } catch (e) {
+            console.log(e)
+            res.redirect("/attendance");
+
+        }}
+    });
 
     // -------------------------------------------------------------------------------------
 
     app.get('/manager/menu', function (req, res) {
+
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.redirect('/login')
+     else {
         var menu = []
-          
+
         try {
             connection.query('SELECT * from menu', function (error, results, fields) {
                 if (error) 
@@ -492,12 +645,14 @@ params=[
             })
         } catch (e) {
             console.log(e)
-        }
+        }}
     });
 
 
     app.post('/manager/menu', function (req, res) {
-
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.redirect('/login')
+     else {
         try {
             console.log(req.body)
             var params = []
@@ -540,11 +695,14 @@ params=[
         }
 
         res.redirect('/manager/menu');
+    }
     });
 
 
     app.delete('/manager/menu/:id', function (req, res) {
-
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.json({error:"Unauthorised"})
+     else {
         try {
             var params = [req.params.id]
 
@@ -564,6 +722,7 @@ params=[
 
 
         res.json({success: "Success"});
+    }
     });
 
 
@@ -571,6 +730,10 @@ params=[
 
 
     app.get('/manager/leaves', function (req, res) {
+        
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.redirect('/login')
+     else {
         var leaves = [],
             staff = [],
             roles = []
@@ -592,11 +755,14 @@ params=[
         } catch (e) {
             console.log(e)
         }
+    }
     });
 
 
     app.post('/manager/leaves/:id', function (req, res) {
-
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.json({error:"Unauthorised"})
+     else {
         try {
             console.log(req.body, req.params)
             var params = []
@@ -617,6 +783,7 @@ params=[
         }
 
         res.redirect('/manager/leaves');
+    }
     });
 
 
@@ -624,6 +791,10 @@ params=[
 
 
     app.get('/manager/staff', function (req, res) {
+        
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.redirect('/login')
+     else {
         var staff = [],
             roles = []
         try {
@@ -644,7 +815,6 @@ params=[
 
                     console.log('The roles: ', results.length);
                     roles = results
-                    res.render('manager/staff', {staff, roles});
 
                 })
 
@@ -653,10 +823,15 @@ params=[
         } catch (e) {
             console.log(e)
         }
+        res.render('manager/staff', {staff, roles});
+
+    }
     });
 
     app.post('/manager/staff', function (req, res) {
-
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.json({error:"Unauthorised"})
+     else {
         try {
             console.log(req.body)
             var params = []
@@ -701,11 +876,14 @@ params=[
         }
 
         res.redirect('/manager/staff');
+    }
     });
 
 
     app.delete('/manager/staff/:id', function (req, res) {
-
+        if (! req.session.userId && req.session.userType != 'Manager') 
+        res.json({error:"Unauthorised"})
+     else {
         try {
             var params = [req.params.id]
 
@@ -723,6 +901,7 @@ params=[
             console.log(e)
         }
         res.json({success: "Success"});
+    }
     });
 
     // -------------------------------------------------------------------------------------

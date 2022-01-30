@@ -1,10 +1,20 @@
 var express = require('express');
 var bodyParser = require('body-parser')
+var session = require('express-session');
+
 
 var routes = require('./routes/index.js');
 var port = process.env.PORT || 3000;
 
 var app = express();
+
+
+app.use(session({
+    secret: 'almost done!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 1200000 }
+  }))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))

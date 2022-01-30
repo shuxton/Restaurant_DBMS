@@ -18,6 +18,8 @@
                 </div>
                 <div class="col-6 col-12-xsmall">
                     <h5>Clock In Time - <%=clockIn%></h5>
+                    <h5>Clock Out Time - <%=clockOut%></h5>
+
                 </div>
                 <div class="col-6 col-12-xsmall">
                     <h5>Monthly Summary</h5>
@@ -33,7 +35,7 @@
               <br/>
               <section>
                 <h2>Apply for leave</h2>
-                <form method="post" action="#">
+                <form method="post" action="/attendance/leave/4">
                     <div class="row gtr-uniform">
                         <div class="col-6 col-12-xsmall">
                             <label for="fromDate">From Date</label>
@@ -68,14 +70,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%for(var i=0;i<leaves.length;i++){%>
                             <tr>
-                                <td>1</td>
-                                <td>Ante turpis integer aliquet porttitor.</td>
-                                <td>29.99</td>
-                                <td>29.99</td>
-                                <td>29.99</td>
+                                <td><%=leaves[i].leaveId%></td>
+                                <td><%=leaves[i].fromDate.toISOString().split('T')[0]%></td>
+                                <td><%=leaves[i].toDate.toISOString().split('T')[0]%></td>
+                                <td><%=leaves[i].reason%></td>
+                                <td><%=leaves[i].status%></td>
+
 
                             </tr>
+                            <%}%>
                            
                         </tbody>
                        

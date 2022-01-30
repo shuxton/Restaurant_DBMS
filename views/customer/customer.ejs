@@ -69,7 +69,7 @@
                
                 <div class="col-12">
                     <ul class="actions">
-                        <%if(orderNo){%>
+                        <%if(!orderNo){%>
                         <li><input id="place" type="submit" value="Place Order" class="primary" onclick="placeOrder()" /></li>
                         <%}else{%>
                         <li>
@@ -117,7 +117,7 @@ $("#quantity"+id).html(q)
     }
 
 function viewOrder(orderNo){
-document.location.href = '/invoice?orderNo='+<%-JSON.stringify(orderNo)%>
+document.location.href = '/customer/invoice?orderNo='+<%-JSON.stringify(orderNo)%>
 }
 
     function placeOrder(){
@@ -164,7 +164,7 @@ $.post('/customer/placeorder/',
             $("#tableStatus").html(data.error)
     
         }
-        location.reload()
+      //  location.reload()
       });
         }
     </script>
