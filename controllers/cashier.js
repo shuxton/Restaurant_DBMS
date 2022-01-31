@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 module.exports.getCashier =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Cashier') 
+    if (! req.session.userId || req.session.userType != 'Cashier') 
     res.redirect('/login')
  else {
     var orders = []
@@ -38,7 +38,7 @@ module.exports.getCashier =  (req, res)=> {
 };
 
 module.exports.getPayment =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Cashier') 
+    if (! req.session.userId || req.session.userType != 'Cashier') 
     res.redirect('/login')
  else {
     var order = null,
@@ -74,13 +74,13 @@ module.exports.getPayment =  (req, res)=> {
 
 
 module.exports.postPayment =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Cashier') 
+    if (! req.session.userId || req.session.userType != 'Cashier') 
     res.json({error:'Unauthorised'})
  else {
     try {
         var params = []
-        var sql = "update orders set status='C' where orderNo=?"
-        params = [req.body.orderNo]
+        var sql = "call order_update(?,?)"
+        params = ['C',req.body.orderNo]
 
 
         connection.query(sql, params, function (error, results, fields) {

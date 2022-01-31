@@ -128,7 +128,7 @@ document.location.href = '/customer/invoice?orderNo='+<%-JSON.stringify(orderNo)
         for(var i=0;i<obj.length;i++){
             var q = parseFloat($("#quantity"+obj[i].itemNo).html())
             if(q>0){
-                total+= parseFloat(obj[i].price)
+                total+= parseFloat(obj[i].price*q)
                 var temp={'itemNo':obj[i].itemNo,'quantity':q}
                 order.push(temp)
             }
@@ -136,7 +136,7 @@ document.location.href = '/customer/invoice?orderNo='+<%-JSON.stringify(orderNo)
 console.log(order)
 
 $.post('/customer/placeorder/',
-{items: order,customerId:1,total:total},
+{items: order,total:total},
       function(data, status){
         console.log(data);
         if(data.success){
@@ -155,7 +155,7 @@ $.post('/customer/placeorder/',
 
        function requestTable(){
             $.post('/customer/table/',
-            {capacity: $("#capacity").val(),customerId:1},
+            {capacity: $("#capacity").val()},
       function(data, status){
         console.log(data);
         if(data.success){

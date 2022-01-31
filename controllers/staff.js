@@ -85,7 +85,7 @@ module.exports.postAttendance =  (req, res)=> {
             
 
 
-            console.log('The menu: ', results.affectedRows);
+            console.log('The menu: ', results);
             menu = results
 
             res.json({success: "Success"});
@@ -125,7 +125,7 @@ module.exports.postLeave =  (req, res)=> {
 
             console.log('Affected rows - : ', results.affectedRows);
 
-            res.redirect("/attendance");
+            res.redirect("/staff");
 
 
         })

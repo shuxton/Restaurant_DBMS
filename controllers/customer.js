@@ -10,9 +10,9 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-module.exports.getCustomer =  (req, res)=> {
+module.exports.getCustomer = (req, res) => {
 
-    if (! req.session.userId && req.session.userType != 'Customer') 
+    if (!req.session.userId && req.session.userType != 'Customer') 
         res.redirect('/login')
      else {
         var tableStatus = null,
@@ -21,23 +21,19 @@ module.exports.getCustomer =  (req, res)=> {
             var params = []
             var sql = "select tableNo from tables where customerId=? and isOccupied='Y' limit 1;"
             params = [req.session.userId]
-            console.log(req.session, "session")
-
-            console.log(params)
-
+            console.log(req.session.userId)
 
             connection.query(sql, params, function (error, results, fields) {
                 if (error) 
                     console.log(error);
                 
 
-
-                console.log('Rows affected ', results.length);
+                console.log('Table No: ', results.length,results);
                 if (results.length > 0) 
                     tableStatus = results[0]['tableNo']
 
                 
-
+console.log(tableStatus)
                 if (! tableStatus) 
                     tableStatus = null
                  else 
@@ -48,8 +44,7 @@ module.exports.getCustomer =  (req, res)=> {
                         console.log(error);
                     
 
-
-                    console.log('Rows affected ', results.length);
+                    console.log('Menu: ', results.length);
                     menu = results
 
                     var orderNo = null
@@ -58,12 +53,13 @@ module.exports.getCustomer =  (req, res)=> {
                             console.log(error);
                         
 
+                        console.log('Order No ', results.length);
 
-                        console.log('Rows affected ', results.length);
-                        console.log(results,results[0]['orderNo'])
                         if (results.length > 0) 
                             orderNo = results[0]['orderNo']
+
                         
+
                         res.render('customer/customer', {tableStatus, menu, orderNo});
 
                     })
@@ -83,8 +79,8 @@ module.exports.getCustomer =  (req, res)=> {
 
 };
 
-module.exports.postTable =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Customer') 
+module.exports.postTable = (req, res) => {
+    if (!req.session.userId && req.session.userType != 'Customer') 
         res.json({error: "Unauthorised"});
      else {
         try {
@@ -96,16 +92,13 @@ module.exports.postTable =  (req, res)=> {
                 req.body.capacity == "" ? 0 : req.body.capacity
             ]
 
-            console.log(params)
-
-
             connection.query(sql, params, function (error, results, fields) {
                 if (error) 
                     console.log(error);
                 
 
-
                 console.log('Rows affected ', results[0].affectedRows);
+
                 if (results[1][0]['@tableNo']) 
                     res.json({
                         success: "Table " + results[1][0]['@tableNo'] + " Assigned"
@@ -126,20 +119,20 @@ module.exports.postTable =  (req, res)=> {
 };
 
 
-module.exports.postOrder =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Customer') 
+module.exports.postOrder = (req, res) => {
+    if (!req.session.userId && req.session.userType != 'Customer') 
         res.json({error: "Unauthorised"});
      else {
-        try { // var obj = JSON.parse(req.body)
-            console.log(req.body)
+        try {
+
             var orderNo = null
-            var sgst = parseFloat(req.body.total) * 2.5
+            var sgst = parseFloat(req.body.total) * 2.5/100
             var cgst = sgst;
             var total = sgst + cgst + parseFloat(req.body.total)
             var params = []
             var sql = 'call customer_order(@orderNo,?,?,?,?,?,?,?); select @orderNo;'
             params = [
-                req.body.customerId,
+                req.session.userId,
                 cgst,
                 sgst,
                 total,
@@ -154,7 +147,6 @@ module.exports.postOrder =  (req, res)=> {
                     console.log(error);
                 
 
-
                 console.log('Rows affected ', results[0].affectedRows);
                 orderNo = results[1][0]['@orderNo']
 
@@ -168,9 +160,7 @@ module.exports.postOrder =  (req, res)=> {
                             console.log(error);
                         
 
-
                         console.log('Item inserted ', results.affectedRows);
-
 
                     });
                 
@@ -189,34 +179,34 @@ module.exports.postOrder =  (req, res)=> {
 
 };
 
-module.exports.getInvoice =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Customer') 
+module.exports.getInvoice = (req, res) => {
+    if (!req.session.userId && req.session.userType != 'Customer') 
         res.redirect("/Login")
      else {
         var order = null,
             items = []
         try {
             var params = []
-            var sql = 'call order_details(?,?);'
-            params = [req.query.orderNo, req.session.userId]
-
+            var sql = 'call order_details(?);'
+            params = [req.query.orderNo]
 
             connection.query(sql, params, function (error, results, fields) {
                 if (error) 
                     console.log(error);
                 
 
-
                 order = results[0]
-                if (order) 
+                if (order.length>0) {
                     order = order[0]
-
-
-                
-
-
-                items = results[1]
-                res.render('customer/invoice', {order, items});
+                    items = results[1]
+                    if (order.customerId != req.session.userId) 
+                        res.redirect('/customer')
+                     else 
+                        res.render('customer/invoice', {order, items});
+                    
+                } else {
+                    res.redirect('/customer')
+                }
 
 
             });
@@ -226,4 +216,3 @@ module.exports.getInvoice =  (req, res)=> {
         }
     }
 };
-

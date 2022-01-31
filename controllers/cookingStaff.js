@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 module.exports.getCookingStaff =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Cheff') 
+    if (! req.session.userId || req.session.userType != 'Cheff') 
     res.redirect('/login')
  else {
     var orders = [],
@@ -40,12 +40,12 @@ module.exports.getCookingStaff =  (req, res)=> {
 };
 
 module.exports.postCookingStaff =  (req, res)=> {
-    if (! req.session.userId && req.session.userType != 'Cheff') 
+    if (! req.session.userId || req.session.userType != 'Cheff') 
     res.json({error:"Unauthorised"})
  else {
     try {
         var params = []
-        var sql = 'update orders set status=? where orderNo=?;'
+        var sql = 'call order_update(?,?)'
         params = [req.body.status, req.body.orderNo]
         connection.query(sql, params, function (error, results, fields) {
             if (error) 
