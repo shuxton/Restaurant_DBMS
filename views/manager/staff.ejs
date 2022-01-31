@@ -129,13 +129,13 @@
 
     function onDelete(id){
         $.ajax({
-    url: 'staff/'+id,
+    url: 'manager/staff/',
     type: 'DELETE',
-    contentType:'application/json',  // <---add this
-    dataType: 'text',                // <---update this
+    contentType:'application/json',  // <---add this,
+    data:{id:id},
     success: function(data) { console.log('Success: ' + data); location.reload()},
     error: function(data){            console.log('Error: ' + data);
-  //  location.reload()
+    location.reload()
         }
 });
        

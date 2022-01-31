@@ -71,7 +71,7 @@
     function updateStatus(id,status){
 
         $.post('/manager/leaves/'+id,
-        {status:status},
+        {status:status,id:id},
   function(data, status){
     console.log("Data: " + data + "\nStatus: " + status);
     location.reload()

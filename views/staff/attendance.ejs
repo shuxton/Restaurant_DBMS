@@ -35,7 +35,7 @@
               <br/>
               <section>
                 <h2>Apply for leave</h2>
-                <form method="post" action="/attendance/leave/4">
+                <form method="post" action="/attendance/leave/">
                     <div class="row gtr-uniform">
                         <div class="col-6 col-12-xsmall">
                             <label for="fromDate">From Date</label>
@@ -97,7 +97,7 @@
 <script>
     function clockIn(){
         $.post('/attendance/',
-{staffId: 4,clockIn:true},
+{clockIn:true},
       function(data, status){
         console.log(data);
         if(data.success){
@@ -113,7 +113,7 @@
 
        function clockOut(){
         $.post('/attendance/',
-{staffId: 4},
+{},
       function(data, status){
         console.log(data);
         if(data.success){

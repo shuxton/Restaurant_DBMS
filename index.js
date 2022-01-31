@@ -26,8 +26,24 @@ app.use('/public', express.static(process.cwd() + '/public'));
 app.set('view engine', 'ejs');
 
 
+var indexRoutes = require("./routes/index")
+var managerRoutes = require("./routes/manager")
+var cashierRoutes = require("./routes/cashier")
+var customerRoutes = require("./routes/customer")
+var staffRoutes = require("./routes/staff")
+var cookingStaffRoutes  = require("./routes/cookingStaff")
 
-routes(app);
+app.use('/', indexRoutes);
+app.use('/', customerRoutes);
+app.use('/', managerRoutes);
+app.use('/', cashierRoutes);
+app.use('/', staffRoutes);
+app.use('/', cookingStaffRoutes);
+
+
+
+
+//routes(app);
 
 
 app.listen(port, function() {
