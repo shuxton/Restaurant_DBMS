@@ -11,6 +11,9 @@
                 <li><a href="/manager/menu" class="button ">Menu</a></li>
                 <li><a href="/manager/staff" class="button">Staff</a></li>
                 <li><a href="/manager/leaves" class="button">Leaves</a></li>
+                <li>
+                    <a href="/manager/reports" class="button">Reports</a>
+                </li>
             </ul>
             
             <section id="staffForm" >
@@ -63,9 +66,6 @@
                             <th>Staff Id</th>
                             <th>Name</th>
                             <th>Role</th>
-                           
-                            <th>Report</th>
-
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -76,8 +76,6 @@
                             <td><%=staff[i].staffId%></td>
                             <td><%=staff[i].name%></td>
                             <td><%=staff[i].role%></td>
-                            <td><button id="<%=staff[i].staffId%>" class="btn btn-primary" onclick="onDelete(this.id)">Report</button></td>
-
                             <td><button id="<%=i%>" class="btn btn-primary" onclick="onEdit(this.id);">Edit</button></td>
                           
                             <td><button id="<%=staff[i].staffId%>" class="btn btn-primary" onclick="onDelete(this.id)">Delete</button></td>

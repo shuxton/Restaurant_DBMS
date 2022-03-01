@@ -8,7 +8,7 @@
               
             
 
-            <section id="table">
+            <section id="table" >
                 <h3>Order</h3>
                 <h3>Status - <%=order.status%></h3>
                 <div class="table-wrapper">
@@ -61,7 +61,7 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <button>Print Invoice</button>
+                    <button id="btn" onclick="printDiv('table')">Print Invoice</button>
                 </div>
 
                
@@ -71,5 +71,19 @@
 
     </div>
 </div>
+
+<script>
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+     $('#btn').hide();
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
 
 <%- include ("../partials/footer") %>

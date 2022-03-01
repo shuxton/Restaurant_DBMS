@@ -17,6 +17,11 @@ router.route('/manager/leaves')
     .get(manager.getLeaves)
     .post(manager.postLeaves)
 
+router.route('/manager/reports')
+    .get(manager.getReport)
+    .post(manager.postReport)
+
+
 
 
 module.exports = router;

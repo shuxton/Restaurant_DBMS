@@ -24,7 +24,7 @@ module.exports.getCookingStaff =  (req, res)=> {
                 console.log(error);
             
 
-
+console.log(results)
             orders = results[0]
             items = results[1]
 

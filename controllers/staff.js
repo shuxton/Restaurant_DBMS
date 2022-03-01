@@ -23,14 +23,11 @@ module.exports.getStaff =  (req, res)=> {
             date.toISOString().slice(0, 19).split('T')[0],
             new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 19).split('T')[0],
             new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 19).split('T')[0],
-            new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 19).split('T')[0],
-            new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 19).split('T')[0],
-            req.session.userId
         ]
 
-        // console.log(params)
+        console.log(params)
 
-        connection.query("select clockIn,clockOut from attendance where staffId=? and day=?;select count(*) as total from attendance where day>=? and day<=?; select count(*) as absent from attendance where day>=? and day<=? and isPresent='N' ; select * from leaves where staffId=? order by leaveId desc;", params, function (error, results, fields) {
+        connection.query("call attendance_summary_individual(?,?,?,?)", params, function (error, results, fields) {
             if (error) 
                 console.log(error);
             
@@ -40,8 +37,8 @@ module.exports.getStaff =  (req, res)=> {
             res.render('staff/attendance', {
                 clockIn:results[0][0] && results[0][0].clockIn? results[0][0].clockIn.toISOString().slice(0, 19).replace('T', ' '):null,
                 clockOut:results[0][0] && results[0][0].clockOut? results[0][0].clockOut.toISOString().slice(0, 19).replace('T', ' '):null,
-                total: results[1][0] && results[1][0].total?results[1][0].total :null,
-                absent:results[2][0] && results[2][0].absent? results[2][0].absent :null,
+                total: results[1][0] && results[1][0].total?results[1][0].total :0,
+                absent:results[2][0] && results[2][0].absent? results[2][0].absent :0,
                 leaves: results[3]
             });
 

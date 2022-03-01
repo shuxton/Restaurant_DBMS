@@ -293,3 +293,54 @@ module.exports.deleteStaff = (req, res) => {
         res.json({success: "Success"});
     }
 };
+
+
+// -------------------------------------------------------------------------------------
+
+
+module.exports.postReport = (req, res) => {
+
+    if (! req.session.userId || req.session.userType != 'Manager') 
+        res.redirect('/login')
+     else {
+        var report = []
+        try {
+            if (!req.body)res.json({"report":report});
+            connection.query('call reports(?,?,?)',[req.body.id,req.body.from,req.body.to], function (error, results, fields) {
+                if (error) 
+                    console.log(error);
+                
+
+
+                    report = results[0]
+
+                console.log('Report: ', report.length);
+
+                res.json({"report":report});
+
+
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+};
+
+
+
+module.exports.getReport = (req, res) => {
+
+    if (! req.session.userId || req.session.userType != 'Manager') 
+        res.redirect('/login')
+     else {
+        var report = []
+        try {
+          res.render('manager/reports')
+
+
+        
+        } catch (e) {
+            console.log(e)
+        }
+    }
+};

@@ -39,6 +39,7 @@ CREATE TABLE `attendance` (
 
 LOCK TABLES `attendance` WRITE;
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+INSERT INTO `attendance` VALUES (4,'2022-01-29 10:49:13',NULL,'2022-01-29','Y'),(NULL,NULL,'2022-01-29 13:42:20','2022-01-29','Y'),(4,'2022-01-30 11:47:43','2022-01-30 11:52:22','2022-01-30','Y'),(5,'2022-01-21 18:57:14',NULL,'2022-01-21','Y'),(5,NULL,NULL,'2022-01-21','N'),(5,NULL,NULL,'2022-01-21','N'),(5,NULL,NULL,'2022-01-22','N'),(5,NULL,NULL,'2022-01-23','N'),(5,NULL,NULL,'2022-01-24','N'),(5,NULL,NULL,'2022-01-25','N'),(5,NULL,NULL,'2022-01-26','N'),(5,NULL,NULL,'2022-01-27','N'),(5,NULL,NULL,'2022-01-28','N'),(5,NULL,NULL,'2022-01-29','N'),(5,NULL,NULL,'2022-01-30','N'),(5,'2022-01-31 13:52:15','2022-01-31 13:52:36','2022-01-31','Y'),(4,NULL,NULL,'2022-01-30','N'),(4,NULL,NULL,'2022-01-30','N'),(4,NULL,NULL,'2022-01-30','N'),(4,NULL,NULL,'2022-01-30','N'),(4,NULL,NULL,'2022-01-30','N'),(4,NULL,NULL,'2022-01-31','N'),(4,NULL,NULL,'2022-02-01','N'),(5,NULL,NULL,'2022-01-31','N'),(5,NULL,NULL,'2022-02-01','N'),(5,'2022-02-02 07:17:59','2022-02-02 07:18:01','2022-02-02','Y'),(4,NULL,NULL,'2022-02-01','N'),(4,NULL,NULL,'2022-02-01','N'),(4,NULL,NULL,'2022-02-01','N'),(4,NULL,NULL,'2022-02-02','N'),(4,NULL,NULL,'2022-02-03','N'),(4,NULL,NULL,'2022-02-04','N'),(5,NULL,NULL,'2022-02-02','N'),(5,NULL,NULL,'2022-02-03','N'),(5,NULL,NULL,'2022-02-04','N'),(6,'2022-02-05 06:13:34','2022-02-05 06:13:35','2022-02-05','Y'),(4,NULL,NULL,'2022-02-04','N'),(5,NULL,NULL,'2022-02-04','N'),(4,NULL,NULL,'2022-02-04','N'),(5,NULL,NULL,'2022-02-04','N'),(4,NULL,NULL,'2022-02-04','N'),(4,NULL,NULL,'2022-02-05','N'),(4,NULL,NULL,'2022-02-06','N'),(4,NULL,NULL,'2022-02-07','N'),(5,NULL,NULL,'2022-02-04','N'),(5,NULL,NULL,'2022-02-05','N'),(5,NULL,NULL,'2022-02-06','N'),(5,NULL,NULL,'2022-02-07','N'),(6,NULL,NULL,'2022-02-05','N'),(6,NULL,NULL,'2022-02-06','N'),(6,NULL,NULL,'2022-02-07','N'),(5,'2022-02-08 07:55:03','2022-02-08 07:55:13','2022-02-08','Y'),(4,NULL,NULL,'2022-02-07','N'),(4,NULL,NULL,'2022-02-08','N'),(4,NULL,NULL,'2022-02-09','N'),(4,NULL,NULL,'2022-02-10','N'),(4,NULL,NULL,'2022-02-11','N'),(4,NULL,NULL,'2022-02-12','N'),(4,NULL,NULL,'2022-02-13','N'),(4,NULL,NULL,'2022-02-14','N'),(4,NULL,NULL,'2022-02-15','N'),(4,NULL,NULL,'2022-02-16','N'),(4,NULL,NULL,'2022-02-17','N'),(4,NULL,NULL,'2022-02-18','N'),(4,NULL,NULL,'2022-02-19','N'),(4,NULL,NULL,'2022-02-20','N'),(5,NULL,NULL,'2022-02-08','N'),(5,NULL,NULL,'2022-02-09','N'),(5,NULL,NULL,'2022-02-10','N'),(5,NULL,NULL,'2022-02-11','N'),(5,NULL,NULL,'2022-02-12','N'),(5,NULL,NULL,'2022-02-13','N'),(5,NULL,NULL,'2022-02-14','N'),(5,NULL,NULL,'2022-02-15','N'),(5,NULL,NULL,'2022-02-16','N'),(5,NULL,NULL,'2022-02-17','N'),(5,NULL,NULL,'2022-02-18','N'),(5,NULL,NULL,'2022-02-19','N'),(5,NULL,NULL,'2022-02-20','N'),(6,NULL,NULL,'2022-02-07','N'),(6,NULL,NULL,'2022-02-08','N'),(6,NULL,NULL,'2022-02-09','N'),(6,NULL,NULL,'2022-02-10','N'),(6,NULL,NULL,'2022-02-11','N'),(6,NULL,NULL,'2022-02-12','N'),(6,NULL,NULL,'2022-02-13','N'),(6,NULL,NULL,'2022-02-14','N'),(6,NULL,NULL,'2022-02-15','N'),(6,NULL,NULL,'2022-02-16','N'),(6,NULL,NULL,'2022-02-17','N'),(6,NULL,NULL,'2022-02-18','N'),(6,NULL,NULL,'2022-02-19','N'),(6,NULL,NULL,'2022-02-20','N'),(4,NULL,NULL,'2022-02-20','N'),(5,NULL,NULL,'2022-02-20','N'),(6,NULL,NULL,'2022-02-20','N'),(6,'2022-02-21 07:58:35','2022-02-21 07:58:46','2022-02-21','Y'),(4,NULL,NULL,'2022-02-20','N'),(5,NULL,NULL,'2022-02-20','N'),(4,NULL,NULL,'2022-02-20','N'),(5,NULL,NULL,'2022-02-20','N'),(4,NULL,NULL,'2022-02-20','N'),(4,NULL,NULL,'2022-02-21','N'),(4,NULL,NULL,'2022-02-22','N'),(4,NULL,NULL,'2022-02-23','N'),(4,NULL,NULL,'2022-02-24','N'),(4,NULL,NULL,'2022-02-25','N'),(4,NULL,NULL,'2022-02-26','N'),(4,NULL,NULL,'2022-02-27','N'),(4,NULL,NULL,'2022-02-28','N'),(5,NULL,NULL,'2022-02-20','N'),(5,NULL,NULL,'2022-02-21','N'),(5,NULL,NULL,'2022-02-22','N'),(5,NULL,NULL,'2022-02-23','N'),(5,NULL,NULL,'2022-02-24','N'),(5,NULL,NULL,'2022-02-25','N'),(5,NULL,NULL,'2022-02-26','N'),(5,NULL,NULL,'2022-02-27','N'),(5,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-21','N'),(6,NULL,NULL,'2022-02-22','N'),(6,NULL,NULL,'2022-02-23','N'),(6,NULL,NULL,'2022-02-24','N'),(6,NULL,NULL,'2022-02-25','N'),(6,NULL,NULL,'2022-02-26','N'),(6,NULL,NULL,'2022-02-27','N'),(6,NULL,NULL,'2022-02-28','N'),(7,'2022-03-01 13:34:04',NULL,'2022-03-01','Y'),(4,NULL,NULL,'2022-02-28','N'),(5,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(5,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(5,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(5,'2022-03-01 13:40:43','2022-03-01 14:06:25','2022-03-01','Y'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N'),(4,NULL,NULL,'2022-02-28','N'),(6,NULL,NULL,'2022-02-28','N');
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +57,7 @@ CREATE TABLE `customer` (
   `phone` varchar(20) DEFAULT NULL,
   `password` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`customerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +66,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,'test','test@customer.com','1234567890','admin');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +87,7 @@ CREATE TABLE `leaves` (
   PRIMARY KEY (`leaveId`),
   KEY `staffId` (`staffId`),
   CONSTRAINT `leaves_ibfk_1` FOREIGN KEY (`staffId`) REFERENCES `staff` (`staffId`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +96,7 @@ CREATE TABLE `leaves` (
 
 LOCK TABLES `leaves` WRITE;
 /*!40000 ALTER TABLE `leaves` DISABLE KEYS */;
+INSERT INTO `leaves` VALUES (1,4,'2022-01-29','2022-01-29','A','Covid'),(2,4,'2022-01-29','2022-01-29','R','Covid again'),(5,4,'2022-01-29','2022-01-29','A',NULL),(6,5,'2022-01-11','2022-02-02','A','Function'),(7,6,'2022-02-05','2022-02-10','R','Out of stattion'),(8,7,'2022-03-01','2022-03-09','P','Sick');
 /*!40000 ALTER TABLE `leaves` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +117,7 @@ CREATE TABLE `menu` (
   `isAvailable` varchar(2) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`itemNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +126,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (13,'Masala Dosa',50.00,'Y','N','N','N','Spicy and Crispy');
+INSERT INTO `menu` VALUES (13,'Masala Dosa',50.00,'Y','N','N','Y','Spicy and Crispy'),(14,'Plain Dosa',40.00,'N','Y','N','Y','Crispy classic'),(15,'Idli',20.00,'Y','N','N','Y','spongy');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,6 +154,7 @@ CREATE TABLE `orderitem` (
 
 LOCK TABLES `orderitem` WRITE;
 /*!40000 ALTER TABLE `orderitem` DISABLE KEYS */;
+INSERT INTO `orderitem` VALUES (19,13,2),(19,14,1),(20,13,2),(20,15,1),(21,13,3),(21,14,1),(21,15,1),(22,13,1),(22,14,1);
 /*!40000 ALTER TABLE `orderitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +179,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`orderNo`),
   KEY `customerId` (`customerId`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,6 +188,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (19,1,3.50,3.50,147.00,140.00,'C',NULL,'2022-01-31 13:23:06','2022-01-31 13:23:06'),(20,1,3.00,3.00,126.00,120.00,'C',NULL,'2022-02-02 12:47:04','2022-02-02 12:49:39'),(21,1,5.25,5.25,220.50,210.00,'C',NULL,'2022-02-05 11:42:38','2022-02-21 14:20:55'),(22,1,2.25,2.25,94.50,90.00,'S',NULL,'2022-03-01 18:57:45','2022-03-01 19:18:02');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +205,7 @@ CREATE TABLE `roles` (
   `salary` int DEFAULT NULL,
   `workHrs` decimal(4,2) DEFAULT NULL,
   PRIMARY KEY (`roleId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,6 +214,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'Cheff',50000,9.00),(2,'Waiter',20000,10.00),(3,'Cashier',30000,10.00),(4,'Other',15000,10.00),(5,'Manager',NULL,10.00);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,10 +235,11 @@ CREATE TABLE `staff` (
   `panNo` varchar(100) DEFAULT NULL,
   `aadharNo` varchar(100) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
+  `lastLogin` datetime DEFAULT NULL,
   PRIMARY KEY (`staffId`),
   KEY `roleId` (`roleId`),
   CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roles` (`roleId`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,9 +248,28 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (1,NULL,'test@staff.com','1234567890','admin','test',NULL,NULL,'Shubham');
+INSERT INTO `staff` VALUES (4,1,'test1@staff.com','1234567890','admin','tfgybhn',NULL,NULL,'test1','2022-03-01 21:15:20'),(5,5,'manager@staff.com','1234567890','admin','dfxcghjb',NULL,NULL,'Shreekanth','2022-03-01 21:15:20'),(6,1,'cheff@staff.com','123456789','admin','dshbjdsn','2345678','456y7','Shubham','2022-03-01 21:15:20'),(7,3,'cashier@staff.com','123456789','admin','dfcghbj','2345678','345678','Dash','2022-03-01 21:15:20');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `add_missing_days` AFTER UPDATE ON `staff` FOR EACH ROW Begin
+call insert_attendance_day(
+curdate(),
+New.staffId) ; 
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `tables`
@@ -263,7 +289,7 @@ CREATE TABLE `tables` (
   KEY `customerId` (`customerId`),
   CONSTRAINT `tables_ibfk_1` FOREIGN KEY (`staffId`) REFERENCES `staff` (`staffId`) ON DELETE SET NULL,
   CONSTRAINT `tables_ibfk_2` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,12 +298,141 @@ CREATE TABLE `tables` (
 
 LOCK TABLES `tables` WRITE;
 /*!40000 ALTER TABLE `tables` DISABLE KEYS */;
+INSERT INTO `tables` VALUES (1,4,NULL,'N',4),(2,4,NULL,'N',4),(3,4,NULL,'N',6),(4,4,NULL,'N',8),(5,4,NULL,'N',8),(6,4,1,'Y',2),(7,4,NULL,'N',2);
 /*!40000 ALTER TABLE `tables` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
+-- Dumping events for database 'restaurant'
+--
+
+--
 -- Dumping routines for database 'restaurant'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `assign_table` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `assign_table`(IN p_customerId int,IN p_capacity int,Out p_tableNo int)
+BEGIN
+set p_tableNo  = (select tableNo from tables where capacity=p_capacity and isOccupied="N" limit 1);
+update tables set isOccupied="Y", customerId = p_customerId where tableNo = p_tableNo;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `attendance` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `attendance`(
+In p_staffId int,
+In p_clockIn datetime,
+In p_clockOut datetime,
+In p_day date,
+In p_isPresent varchar(2)
+)
+BEGIN
+
+if((select count(*) from attendance where staffId=p_staffId and day=p_day)=0) 
+then
+INSERT INTO `restaurant`.`attendance`
+(`staffId`,
+`clockIn`,
+`clockOut`,
+`day`,
+`isPresent`)
+VALUES
+(p_staffId,
+p_clockIn,
+p_clockOut,
+p_day,
+p_isPresent);
+
+else
+UPDATE `restaurant`.`attendance`
+SET
+`clockOut` = p_clockOut,
+`isPresent` = p_isPresent
+WHERE staffId = p_staffId and day=p_day;
+end if;
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `attendance_summary_individual` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `attendance_summary_individual`(
+In p_staffId int,
+In p_day date,
+In p_from date,
+In p_to date
+)
+BEGIN
+select clockIn,clockOut from attendance where staffId=p_staffId and day=p_day;
+select count(*) as total from attendance where day>p_from and day<=p_to and staffId=p_staffId; 
+select count(*) as absent from attendance where day>p_from and day<=p_to and isPresent='N' and staffId=p_staffId;
+select * from leaves where staffId=p_staffId order by leaveId desc;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `cooking_staff` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cooking_staff`()
+BEGIN
+select o.*,t.tableNo from orders o inner join tables t on o.customerId = t.customerId where o.status<>'C' order by create_date desc;
+
+select m.name,oi.* from 
+orderItem oi inner join menu m 
+on m.itemNo = oi.itemNo 
+inner join orders 
+o on o.orderNo = oi.orderNo
+ where o.status<>'C'
+order by o.create_date desc;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `customer_invoice` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -320,7 +475,8 @@ In p_email varchar(50),
 In p_password varchar(200)
 )
 BEGIN
-select count(*) from customers where email=p_email and password=p_password;
+select customerId from customer where email=p_email and password=p_password limit 1;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -339,7 +495,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `customer_order`(
 Out orderNo int,
-In p_email varchar(50),
+In p_CustomerId varchar(50),
 In p_cgst decimal(8,2),
 In p_sgst decimal(8,2),
 In p_amount decimal(8,2),
@@ -349,7 +505,7 @@ In p_waitingTime int
 )
 BEGIN
 insert into Orders(customerId,cgst,sgst,total,amount,status,waitingTime,create_date,modify_date) values
-((select customerId from customer where email=p_email),
+(p_CustomerId,
 p_cgst,p_sgst,p_total,p_amount,p_status,p_waitingTime,now(),now() ) ;
 set orderNo = last_insert_id();
 END ;;
@@ -370,7 +526,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `customer_order_item`(
 In p_orderNo int,
-In p_itemNo int
+In p_itemNo int,
+In p_quantity int
 )
 BEGIN
 insert into OrderItem(orderNo,itemNo,quantity) values
@@ -398,9 +555,9 @@ In p_name varchar(50),
 In p_phone varchar(50)
 )
 BEGIN
-if( p_email not in (select email from customers))
+if( p_email not in (select email from customer))
 then
-insert into customers(name,email,phone,password) values (p_name,p_email,p_phone,p_password) ;
+insert into customer(name,email,phone,password) values (p_name,p_email,p_phone,p_password) ;
 end if;
 
 END ;;
@@ -428,6 +585,31 @@ update tables set isOccupied='Y',
 customerId=(select customerId from customer where email=p_email) 
 where isOccupied='N'
 limit 1; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insert_attendance_day` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_attendance_day`(In p_day date,In p_staffId int)
+BEGIN
+    DECLARE i date;
+    set i= (select max(day) from attendance where staffId= p_staffId);
+    
+    WHILE i< p_day DO
+        INSERT INTO attendance (staffId, day, isPresent) VALUES (p_staffId, i, 'N');
+        SET i = i + INTERVAL 1 DAY;
+    END WHILE;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -517,6 +699,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `order_details` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `order_details`(IN p_orderNo int)
+BEGIN
+select * from orders  where orderNo=p_orderNo ;
+select m.*,o.quantity from 
+orderItem o inner join 
+menu m on m.itemNo = o.itemNo
+where o.orderNo=p_orderNo;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `order_update` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -528,13 +733,60 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `order_update`(
-In p_email varchar(50),
-In p_status varchar(2)
+In p_status varchar(2),
+In p_orderNo int
 )
 BEGIN
 
 update orders set status=p_status , modify_date = now()
-where customerId= (select customerId from customer where email=p_email);
+where orderNo= p_orderNo;
+
+if(p_status='C')
+then
+update tables set isOccupied='N',customerId=null where customerId = (select customerId from orders where orderNo = p_orderNo);
+end if;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `reports` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reports`(IN id int,In p_from date,In p_to date)
+BEGIN
+
+if(id=1)
+then
+select s.staffId,r.roleName,
+(select count(*) from attendance a where day>p_from and day<=p_to and a.staffId = s.staffId) as total,
+(select count(*) from attendance a where day>p_from and day<=p_to and a.staffId = s.staffId and isPresent='N') as absent
+from staff s
+inner join roles r on (s.roleId=r.roleId);
+
+elseif(id=2)
+then
+select m.name,m.price,m.isVeg,sum(quantity) as 'Order Count',sum(quantity)*m.price as 'Amount' from menu m 
+inner join orderitem oi on (m.itemNo=oi.itemNo) 
+inner join orders o on (oi.orderNo=o.orderNo)
+where create_date>=p_from and create_date<=p_to
+group by m.itemNo;
+
+elseif(id=3)
+then
+select o.orderNo,o.cgst,o.sgst,o.total,o.amount,o.create_date
+from orders o
+where o.create_date>=p_from and o.create_date<=p_to;
+end if;
 
 END ;;
 DELIMITER ;
@@ -557,7 +809,11 @@ In p_email varchar(50),
 In p_password varchar(200)
 )
 BEGIN
-select count(*) from staff where email=p_email and password=p_password;
+select staffId,roleId from staff where email=p_email and password=p_password;
+if((select count(*) from staff where email=p_email and password=p_password)>0)
+then
+update staff set lastLogin = now();
+end if;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -627,7 +883,7 @@ In p_roleId int
 BEGIN
 
 update staff set name=p_name,phone=p_phone,address=p_address,roleId=p_roleId,panNo=p_panNo,
-aadharNo=p_aadharNo , email=p_email where staffId=p_staffId;
+aadharNo=p_aadharNo , email=p_email,password=p_password where staffId=p_staffId;
 
 
 
@@ -647,4 +903,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-15 18:54:29
+-- Dump completed on 2022-03-01 21:23:47

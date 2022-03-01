@@ -1,0 +1,115 @@
+<%- include ("../partials/header") %>
+<%- include ("../partials/navbar") %>
+<div id="main">
+    <div class="inner">
+        <header>
+            <h1>Manager<br/>
+            </header>
+            <ul class="actions">
+                <li>
+                    <a href="/manager/menu" class="button ">Menu</a>
+                </li>
+                <li>
+                    <a href="/manager/staff" class="button">Staff</a>
+                </li>
+                <li>
+                    <a href="/manager/leaves" class="button">Leaves</a>
+                </li>
+                <li>
+                    <a href="/manager/reports" class="button">Reports</a>
+                </li>
+            </ul>
+            <section id="reports">
+                <h2>Reports</h2>
+                <div class="row gtr-uniform">
+                    <div class="col-6 col-12-xsmall">
+                        <label for="fromDate">From Date</label>
+                        <input type="date" name="fromDate" id="fromDate" value="" placeholder="From Date"/>
+                    </div>
+                    <div class="col-6 col-12-xsmall">
+                        <label for="toDate">To Date</label>
+                        <input type="date" name="toDate" id="toDate" value="" placeholder="To Date"/>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl No</th>
+                            <th>Name</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Staff</td>
+                            <td>
+                                <button id="1" class="btn btn-primary" onclick="download(1,'Staff');">Download</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Orders</td>
+                            <td>
+                                <button id="2" class="btn btn-primary" onclick="download(2,'Orders');">Download</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Financials</td>
+                            <td>
+                                <button id="3" class="btn btn-primary" onclick="download(3,'Financials');">Download</button>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+
+            </section>
+
+
+        </div>
+    </div>
+
+    <%- include ("../partials/footer") %>
+
+    <script>
+
+        function exportCSV(rows,name) {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += Object.keys(rows[0]).join(",") + "\r\n";
+
+            rows.forEach(function (rowArray) {
+                console.log(name)
+                let row =  Object.values(rowArray).join(",");
+                csvContent += row + "\r\n";
+            });
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+                link.setAttribute("download", name+"-" + new Date().toUTCString() + ".csv");
+          
+            document.body.appendChild(link); 
+
+            link.click();
+        }
+
+
+        function download(id,name) {
+            $.post('/manager/reports/', {
+                id: id,
+                from: $("#fromDate").val(),
+                to: $("#toDate").val()
+
+            }, function (data, status) {
+                console.log(data.report);
+                exportCSV(data.report,name)
+
+            });
+        }
+    </script>

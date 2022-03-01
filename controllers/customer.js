@@ -12,7 +12,7 @@ connection.connect();
 
 module.exports.getCustomer = (req, res) => {
 
-    if (!req.session.userId && req.session.userType != 'Customer') 
+    if (!req.session.userId || req.session.userType != 'Customer') 
         res.redirect('/login')
      else {
         var tableStatus = null,
@@ -80,7 +80,7 @@ console.log(tableStatus)
 };
 
 module.exports.postTable = (req, res) => {
-    if (!req.session.userId && req.session.userType != 'Customer') 
+    if (!req.session.userId || req.session.userType != 'Customer') 
         res.json({error: "Unauthorised"});
      else {
         try {
@@ -88,7 +88,7 @@ module.exports.postTable = (req, res) => {
             var params = []
             var sql = 'call assign_table(?,?,@tableNo); select @tableNo;'
             params = [
-                req.session.customerId,
+                req.session.userId,
                 req.body.capacity == "" ? 0 : req.body.capacity
             ]
 
@@ -120,7 +120,7 @@ module.exports.postTable = (req, res) => {
 
 
 module.exports.postOrder = (req, res) => {
-    if (!req.session.userId && req.session.userType != 'Customer') 
+    if (!req.session.userId || req.session.userType != 'Customer') 
         res.json({error: "Unauthorised"});
      else {
         try {
@@ -180,7 +180,7 @@ module.exports.postOrder = (req, res) => {
 };
 
 module.exports.getInvoice = (req, res) => {
-    if (!req.session.userId && req.session.userType != 'Customer') 
+    if (!req.session.userId || req.session.userType != 'Customer') 
         res.redirect("/Login")
      else {
         var order = null,

@@ -8,9 +8,12 @@
             <h1>Manager<br />
               </header>
               <ul class="actions">
-                <li><a href="/manager/leaves" class="button ">leaves</a></li>
+                <li><a href="/manager/menu" class="button ">Menu</a></li>
                 <li><a href="/manager/staff" class="button">Staff</a></li>
                 <li><a href="/manager/leaves" class="button">Leaves</a></li>
+                <li>
+                    <a href="/manager/reports" class="button">Reports</a>
+                </li>
             </ul>
               <section id="leavesForm"  >
                 <h2>Leaves</h2>
@@ -69,8 +72,8 @@
 
 
     function updateStatus(id,status){
-
-        $.post('/manager/leaves/'+id,
+console.log("yo")
+        $.post('/manager/leaves/',
         {status:status,id:id},
   function(data, status){
     console.log("Data: " + data + "\nStatus: " + status);
