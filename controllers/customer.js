@@ -28,12 +28,16 @@ module.exports.getCustomer = (req, res) => {
                     console.log(error);
                 
 
-                console.log('Table No: ', results.length,results);
+
+                console.log('Table No: ', results.length, results);
                 if (results.length > 0) 
                     tableStatus = results[0]['tableNo']
 
+
                 
-console.log(tableStatus)
+
+
+                console.log(tableStatus)
                 if (! tableStatus) 
                     tableStatus = null
                  else 
@@ -44,6 +48,7 @@ console.log(tableStatus)
                         console.log(error);
                     
 
+
                     console.log('Menu: ', results.length);
                     menu = results
 
@@ -53,12 +58,15 @@ console.log(tableStatus)
                             console.log(error);
                         
 
+
                         console.log('Order No ', results.length);
 
                         if (results.length > 0) 
                             orderNo = results[0]['orderNo']
 
+
                         
+
 
                         res.render('customer/customer', {tableStatus, menu, orderNo});
 
@@ -97,6 +105,7 @@ module.exports.postTable = (req, res) => {
                     console.log(error);
                 
 
+
                 console.log('Rows affected ', results[0].affectedRows);
 
                 if (results[1][0]['@tableNo']) 
@@ -126,7 +135,7 @@ module.exports.postOrder = (req, res) => {
         try {
 
             var orderNo = null
-            var sgst = parseFloat(req.body.total) * 2.5/100
+            var sgst = parseFloat(req.body.total) * 2.5 / 100
             var cgst = sgst;
             var total = sgst + cgst + parseFloat(req.body.total)
             var params = []
@@ -147,6 +156,7 @@ module.exports.postOrder = (req, res) => {
                     console.log(error);
                 
 
+
                 console.log('Rows affected ', results[0].affectedRows);
                 orderNo = results[1][0]['@orderNo']
 
@@ -159,6 +169,7 @@ module.exports.postOrder = (req, res) => {
                         if (error) 
                             console.log(error);
                         
+
 
                         console.log('Item inserted ', results.affectedRows);
 
@@ -195,8 +206,9 @@ module.exports.getInvoice = (req, res) => {
                     console.log(error);
                 
 
+
                 order = results[0]
-                if (order.length>0) {
+                if (order.length > 0) {
                     order = order[0]
                     items = results[1]
                     if (order.customerId != req.session.userId) 
@@ -204,6 +216,7 @@ module.exports.getInvoice = (req, res) => {
                      else 
                         res.render('customer/invoice', {order, items});
                     
+
                 } else {
                     res.redirect('/customer')
                 }

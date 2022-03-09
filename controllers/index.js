@@ -47,12 +47,7 @@ connection.connect();
                     console.log(error);
                 
 
-                console.log('Rows affected ', results[0].affectedRows);
-
-                if (results[0].affectedRows > 0) 
                     res.redirect('/login');
-                 else 
-                    res.redirect("/signup")
                 
             });
         } catch (e) {
