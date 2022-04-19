@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -22,7 +22,7 @@ module.exports.getStaff =  (req, res)=> {
             req.session.userId,
             date.toISOString().slice(0, 19).split('T')[0],
             new Date(date.getFullYear(), date.getMonth(), 1).toISOString().slice(0, 19).split('T')[0],
-            new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().slice(0, 19).split('T')[0],
+            new Date(date.getFullYear(), date.getMonth() + 1, 1).toISOString().slice(0, 19).split('T')[0],
         ]
 
         console.log(params)

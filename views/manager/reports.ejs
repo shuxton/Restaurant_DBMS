@@ -108,7 +108,9 @@
 
             }, function (data, status) {
                 console.log(data.report);
+                if(data.report.length>0)
                 exportCSV(data.report,name)
+                else alert('Data unavailable for the report')
 
             });
         }
